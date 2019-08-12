@@ -1,5 +1,61 @@
 .App {
-  text-align: center;
+  background-color: #639898;
+  height: 100%;
+  width: 100%;
+  color: #E8E0CC;
+}
+
+.Nav {
+  background-color: #61dafb;
+  display: flex;
+  min-height: 8vh;
+  min-width: 10vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.Main-Container {
+
+}
+
+.Banner {
+  display: flex;
+  background-color: #6E7B66;
+  min-width: 100vw;
+  height: 8vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.Beach-Container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  padding: 30px;
+  font-size: 20px;
+  flex-wrap: wrap;
+}
+
+.Beach-Card {
+  display: flex;
+  background-color: #D9EBED;
+  width: 20vw;
+  height: 40vh;
+  color: #976224;
+  font-size: 20px;
+
+}
+
+.Show {
+  display: flex;
+}
+
+.Beach-Details {
+  display: flex;
+}
+
+.Login-Container {
+  display: flex;
 }
 
 .App-logo {
@@ -9,8 +65,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #639898;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,6 +83,6 @@
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(3000deg);
   }
 }
