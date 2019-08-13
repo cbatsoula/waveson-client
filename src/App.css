@@ -1,18 +1,58 @@
 .App {
   background-color: #639898;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   color: #E8E0CC;
+  /* font-family: 'Merienda', cursive; */
+  /* font-family: 'Lemonada', cursive; */
+  font-family: 'Allerta Stencil', sans-serif;
+  
+}
+
+button {
+    display: inline-block;
+    border-radius: 10px;
+    border-style: double;
+    border-width: 5px;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: #dee3cc;
+    color: #ffffff;
+    font-family: 'Allerta Stencil', sans-serif;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+    background: #5e8691;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
 }
 
 .Nav {
-  background-color: #61dafb;
+  background-color: #95c0cc;
   display: flex;
-  height: 8vh;
+  height: 10vh;
   width: 100vw;
   align-items: center;
   justify-content: center;
-
+  font-size: 35px;
+  border-style: hidden hidden solid;
+  color: #3f4a38
 }
 
 .Nav-bttns {
@@ -22,6 +62,7 @@
   width: 10vw;
   align-items: center;
   justify-content: space-between;
+  color: #3f4a38;
 }
 
 .Main-Container {
@@ -35,13 +76,18 @@
   height: 8vh;
   align-items: center;
   justify-content: center;
+  font-size: 25px;
+  border-style: solid hidden solid;
+  color: #3f4a38;
 }
 
 .Beach-Container {
   display: flex;
+  height: 100%;
+  width: 100%;
   justify-content: space-around;
   flex-direction: row;
-  padding: 30px;
+  padding: 10px;
   font-size: 20px;
   flex-wrap: wrap;
   margin: auto;
@@ -49,9 +95,12 @@
 
 .FavContainer {
   display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #639575;
   justify-content: space-around;
   flex-direction: row;
-  padding: 30px;
+  padding: 10px;
   font-size: 20px;
   flex-wrap: wrap;
   margin: auto;
@@ -59,7 +108,7 @@
 
 .Beach-Card {
   display: flex;
-  background-color: #D9EBED;
+  background-color: #dee3cc;
   width: 15vw;
   height: 30vh;
   color: #976224;
@@ -68,36 +117,65 @@
   margin: auto;
   padding: 2%;
 
+  border-radius: 10px;
+  border: 2px outset #6E7B66;
+  /* border-width: 5px ; */
+
 }
 
 .Show {
   display: flex;
   background-color: #639898;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  font-size: 28px;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 2%;
+
+}
+
+.Save-bttn {
+  display: flex;
+  width: 10%;
+  height: 10%;
 }
 
 .Beach-Details {
   display: flex;
-  background-color: #639898;
-  height: 100%;
-  width: 100%;
+  /* background-color: #639898; */
+  height: 60%;
+  width: 80%;
+  background-color: #dee3cc;
+  color: #976224;
+  font-size: 25px;
+  justify-content: space-evenly;
+  margin: auto;
+  padding: 2%;
+
+  border-radius: 10px;
+  border-style: double;
+  border-width: 5px;
 }
 
 .Login-Container {
   display: flex;
-  height: 10%;
+  height: 10vh;
   align-items: center;
-  width: 50%;
+  width: 50vw;
   justify-content: center;
-  border-style: double;
-  border-width: 5px;
+
+  border: 3px outset #3f4a38;
+  /* border-width: 3px; */
   padding: 50px;
+
   flex-direction: column;
   align-content: space-around;
   font-size: 30px;
-  border-radius: 25px;
+
+  border-radius: 10px;
   background: #E8E0CC;
+
   margin: auto;
   color: #639898;
 

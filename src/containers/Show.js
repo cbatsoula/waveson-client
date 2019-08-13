@@ -16,15 +16,18 @@ class Show extends React.Component {
       .then( data => {
         this.setState({
           stats: data
-        }, () => {console.log(this.state.stats.data.weather[0])})
+        }, () => {
+          // console.log(this.state.stats.data.weather[0])
+          this.renderToday()
+        })
       })
   }
 
   renderToday = () => {
+    let todayWeather = this.state.stats.data.weather[0]
     this.setState({
-      today: this.state.stats.data.weather[0],
+      today: todayWeather
     }, () => {console.log(this.state.today)})
-
   }
 
   saveBeach = () => {
@@ -39,7 +42,7 @@ class Show extends React.Component {
     let thisOne = this.props.allBeaches.find(beach => {
       return beach.name === this.props.currentBeach.name
     })
-    console.log("save beach", thisOne)
+    // console.log("save beach", thisOne)
 
     if (thisOne){
       fetch('http://localhost:3000/favs', {
@@ -61,15 +64,24 @@ class Show extends React.Component {
 
       // {this.state.stats.data.weather[0].astronomy.sunrise}
   render () {
-    console.log("SHOW STATE", this.state.stats.data)
+    console.log("SHOW STATE", this.state)
     console.log("user", this.props.currentUser)
     console.log("all beaches from api", this.props.allBeaches)
     return (
-      <div className="Show">
-      im a show page
-        <button onClick={this.saveBeach}>Save</button>
-        <BeachDetails />
-
+      <div>
+        <div className="Show">
+        {this.props.currentBeach.name}
+          <div className="Save-bttn">
+          <button onClick={this.saveBeach}>Save</button>
+          </div>
+        </div>
+        {
+          this.state.today
+          ?
+          <BeachDetails today={this.state.today}/>
+          :
+          null
+        }
       </div>
     )
   }
