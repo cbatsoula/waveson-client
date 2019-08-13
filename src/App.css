@@ -8,10 +8,20 @@
 .Nav {
   background-color: #61dafb;
   display: flex;
-  min-height: 8vh;
-  min-width: 10vw;
+  height: 8vh;
+  width: 100vw;
   align-items: center;
   justify-content: center;
+
+}
+
+.Nav-bttns {
+  display: flex;
+  padding: 5%;
+  height: 8vh;
+  width: 10vw;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .Main-Container {
@@ -29,36 +39,83 @@
 
 .Beach-Container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-direction: row;
   padding: 30px;
   font-size: 20px;
   flex-wrap: wrap;
+  margin: auto;
+}
+
+.FavContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  padding: 30px;
+  font-size: 20px;
+  flex-wrap: wrap;
+  margin: auto;
 }
 
 .Beach-Card {
   display: flex;
   background-color: #D9EBED;
-  width: 20vw;
-  height: 40vh;
+  width: 15vw;
+  height: 30vh;
   color: #976224;
   font-size: 20px;
+  justify-items: space-evenly;
+  margin: auto;
+  padding: 2%;
 
 }
 
 .Show {
   display: flex;
+  background-color: #639898;
+  height: 100%;
+  width: 100%;
 }
 
 .Beach-Details {
   display: flex;
+  background-color: #639898;
+  height: 100%;
+  width: 100%;
 }
 
 .Login-Container {
   display: flex;
+  height: 10%;
+  align-items: center;
+  width: 50%;
+  justify-content: center;
+  border-style: double;
+  border-width: 5px;
+  padding: 50px;
+  flex-direction: column;
+  align-content: space-around;
+  font-size: 30px;
+  border-radius: 25px;
+  background: #E8E0CC;
+  margin: auto;
+  color: #639898;
+
 }
 
-.App-logo {
+.Login-Sub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.Login-Form {
+  display: flex;
+
+}
+
+/* .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
@@ -85,4 +142,4 @@
   to {
     transform: rotate(3000deg);
   }
-}
+} */

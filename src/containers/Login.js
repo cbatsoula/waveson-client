@@ -22,14 +22,16 @@ class Login extends React.Component {
 
   render(){
     return (
-      <div className="login-container">
-        <div className="login-subcontainer">
-        <h3>LOGIN</h3>
-        <form className="login-form" onSubmit={this.handleSubmit}>
-          <input onChange={this.handleInput} type="text" name="username" value={this.state.username} placeholder="Username"/>
-          <input onChange={this.handleInput} type="password" name="password" value={this.state.password} placeholder="Password"/>
-          <input type="submit" value="LOGIN" />
-        </form>
+      <div className="App">
+        <div className="Login-Container">
+          <h3>LOGIN</h3>
+          <div className="Login-Sub">
+            <form className="Login-Form" onSubmit={this.handleSubmit}>
+              <input onChange={this.handleInput} type="text" name="username" value={this.state.username} placeholder="Username"/>
+              <input onChange={this.handleInput} type="password" name="password" value={this.state.password} placeholder="Password"/>
+              <input type="submit" value="LOGIN" />
+            </form>
+          </div>
         </div>
       </div>
     )

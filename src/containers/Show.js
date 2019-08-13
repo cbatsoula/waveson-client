@@ -5,7 +5,8 @@ import BeachDetails from './BeachDetails'
 
 class Show extends React.Component {
   state = {
-    stats: []
+    stats: [],
+    today: null,
   }
 
   componentDidMount() {
@@ -15,17 +16,58 @@ class Show extends React.Component {
       .then( data => {
         this.setState({
           stats: data
-        }, () => {console.log(this.state.stats.data.weather)})
+        }, () => {console.log(this.state.stats.data.weather[0])})
       })
+  }
+
+  renderToday = () => {
+    this.setState({
+      today: this.state.stats.data.weather[0],
+    }, () => {console.log(this.state.today)})
+
+  }
+
+  saveBeach = () => {
+    console.log("you got this!", this.props.currentUser, this.props.currentBeach)
+    // let thisOne = this.props.allBeaches.map(beach => {
+    //   if (beach.name === this.props.currentBeach.name) {
+    //     return beach.id
+    //   } else {
+    //     return beach
+    //   }
+    // })
+    let thisOne = this.props.allBeaches.find(beach => {
+      return beach.name === this.props.currentBeach.name
+    })
+    console.log("save beach", thisOne)
+
+    if (thisOne){
+      fetch('http://localhost:3000/favs', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: this.props.currentUser.id,
+          beach_id: thisOne.id,
+        })
+      })
+        .then(r => r.json())
+        .then(console.log)
+    }
+
   }
 
       // {this.state.stats.data.weather[0].astronomy.sunrise}
   render () {
     console.log("SHOW STATE", this.state.stats.data)
-    console.log("Show!!", this.props.currentBeach.geometry.location.lat, this.props.currentBeach.geometry.location.lng)
+    console.log("user", this.props.currentUser)
+    console.log("all beaches from api", this.props.allBeaches)
     return (
       <div className="Show">
       im a show page
+        <button onClick={this.saveBeach}>Save</button>
         <BeachDetails />
 
       </div>

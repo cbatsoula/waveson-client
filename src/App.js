@@ -34,7 +34,7 @@ class App extends React.Component {
     })
     this.setState({
       currentBeach: selectedBeach
-    }, () => {this.props.history.push('/home')})
+    }, () => {this.props.history.push('/beach')})
 
   }
 
@@ -222,20 +222,23 @@ class App extends React.Component {
     console.log("app", this.state)
     // console.log("beach info", this.state.beachData.results)
     return (
-      <Router>
+
         <div className="App">
-          <Nav />
+          <Nav currentUser={this.state.currentUser} />
           <Switch>
 
             <Route path='/signup' render={() => <SignUp setUser={this.setUser} signUpUser={this.signUpUser}/>} />
             <Route path="/login" render={(routerProps) => <Login {...routerProps} loginUser={this.loginUser}/>} />
             <Route path='/map' component={Map} />
-            <Route path='/home' render={(routerProps) => <MainContainer selectBeach={this.selectBeach} beachData={this.state.beachData.results} />} />
+            <Route path='/beach' render={(routerProps) => <Show {...routerProps} currentBeach={this.state.currentBeach} currentUser={this.state.currentUser} allBeaches={this.state.allBeaches}/>} />
+
+
 
           </Switch>
+          <Route exact path='/home' render={(routerProps) => <MainContainer {...routerProps} selectBeach={this.selectBeach} beachData={this.state.beachData.results} allBeaches={this.state.allBeaches} />} />
 
         </div>
-      </Router>
+
     );
   }
 
