@@ -6,7 +6,7 @@ class Banner extends React.Component {
 
     return (
       <div className="Banner">
-        Banner
+        {this.props.title}
       </div>
 
     )

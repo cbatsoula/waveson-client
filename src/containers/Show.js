@@ -1,5 +1,6 @@
 import React from 'react';
-import BeachDetails from './BeachDetails'
+import BeachDetails from './BeachDetails';
+import { Link } from 'react-router-dom';
 
   const WORLD_API_KEY = `${process.env.REACT_APP_WORLD_API_KEY}`
 

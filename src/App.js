@@ -225,7 +225,12 @@ class App extends React.Component {
     // }
   }
 
-
+  logout = () => {
+    this.setState({
+      currentUser: null
+    })
+    this.props.history.push("/login")
+   }
 
 
 
@@ -235,7 +240,7 @@ class App extends React.Component {
     return (
 
         <div className="App">
-          <Nav currentUser={this.state.currentUser} />
+          <Nav logout={this.logout} currentUser={this.state.currentUser} />
           <Switch>
 
             <Route path='/signup' render={() => <SignUp setUser={this.setUser} signUpUser={this.signUpUser}/>} />
