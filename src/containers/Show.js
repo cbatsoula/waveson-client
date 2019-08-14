@@ -42,7 +42,7 @@ class Show extends React.Component {
     let thisOne = this.props.allBeaches.find(beach => {
       return beach.name === this.props.currentBeach.name
     })
-    // console.log("save beach", thisOne)
+    console.log("save beach", thisOne)
 
     if (thisOne){
       fetch('http://localhost:3000/favs', {
@@ -59,8 +59,54 @@ class Show extends React.Component {
         .then(r => r.json())
         .then(console.log)
     }
-
   }
+
+//   handleDelete = (thing) => {
+//   console.log("delete this review", thing.id)
+//   fetch(`http://localhost:3000/reviews/${thing.id}`, {
+//     method: "DELETE",
+//   })
+//     .then( r => r.json())
+//     .then( data => {
+//       console.log("removed", data)
+//       var newItems = this.state.reviews.filter((review) => {
+//         return review.id !== thing.id});
+//     this.setState({ reviews: newItems });
+//     })
+// }
+
+  removeBeach = () => {
+    console.log("remove", this.props.beachSaveData )
+    let userID = this.props.currentUser.id
+    let thisOne = this.props.allBeaches.find(beach => {
+      return beach.name === this.props.currentBeach.name
+    })
+    let favID = this.props.beachSaveData.find(fav => {
+      return fav.user_id === userID && fav.beach_id === thisOne.id
+        // console.log("remove favID", favID)
+      })
+
+      fetch(`http://localhost:3000/favs/${favID.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Methods": "DELETE",
+          "Access-Control-Allow-Origin": "http://localhost"
+        //   "Accept": "application/json",
+        },
+      })
+        .then(r => r.json())
+        .then(console.log)
+    }
+  //   console.log("you got this!", this.props.currentUser, this.props.currentBeach)
+  //   let thisOne = this.props.allBeaches.find(beach => {
+  //     return beach.name === this.props.currentBeach.name
+  //   })
+  //   // console.log("save beach", thisOne)
+  //
+  //   if (thisOne){
+
+  //   }
 
       // {this.state.stats.data.weather[0].astronomy.sunrise}
   render () {
@@ -73,6 +119,7 @@ class Show extends React.Component {
         {this.props.currentBeach.name}
           <div className="button">
           <button onClick={this.saveBeach}>Save</button>
+          <button onClick={this.removeBeach}>Remove</button>
           </div>
         </div>
         {

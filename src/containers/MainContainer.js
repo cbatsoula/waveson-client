@@ -7,20 +7,20 @@ import FavContainer from './FavContainer';
 class MainContainer extends React.Component {
 
   state = {
-    beachSaveData: null,
+    // beachSaveData: null,
     theFavs: [],
   }
 
 
   componentDidMount() {
-    fetch('http://localhost:3000/favs')
-      .then( r => r.json())
-      .then( data => {
-        console.log("wtf my dude", data)
-        this.setState({
-          beachSaveData: data
-        })
-      })
+    // fetch('http://localhost:3000/favs')
+    //   .then( r => r.json())
+    //   .then( data => {
+    //     // console.log("wtf my dude", data)
+    //     this.setState({
+    //       beachSaveData: data
+    //     })
+    //   })
   }
 
   // renderBeachStuff = () => {
@@ -43,7 +43,7 @@ class MainContainer extends React.Component {
     let arr1 = this.props.allBeaches.map(beach => {
       return beach
     })
-    let arr2 = this.state.beachSaveData.map(fav => {
+    let arr2 = this.props.beachSaveData.map(fav => {
       return fav
     })
     let userID = this.props.currentUser.id
@@ -63,14 +63,14 @@ class MainContainer extends React.Component {
   }
 
   render () {
-    console.log("main", this.state.beachSaveData, this.props.currentUser)
+    console.log("main", this.props.beachSaveData, this.props.currentUser)
     return (
       <div className="Main-Container">
         <Banner />
         <BeachContainer selectBeach={this.props.selectBeach} beachData={this.props.beachData}/>
         <Banner />
         {
-          this.state.beachSaveData
+          this.props.beachSaveData
           ?
           <FavContainer currentUser={this.props.currentUser} selectBeach={this.props.selectBeach} theFavs={this.doTheThing()} />
           :

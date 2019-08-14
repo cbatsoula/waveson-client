@@ -24,6 +24,7 @@ class App extends React.Component {
     currentUser: null,
     currentBeach: null,
     allBeaches: [],
+    beachSaveData: null,
   }
 
   selectBeach = (propsName) => {
@@ -55,6 +56,14 @@ class App extends React.Component {
       .then( allBeaches => {
         this.setState({
           allBeaches: allBeaches
+        })
+      })
+    fetch('http://localhost:3000/favs')
+      .then( r => r.json())
+      .then( data => {
+          // console.log("wtf my dude", data)
+        this.setState({
+          beachSaveData: data
         })
       })
   }
@@ -218,6 +227,8 @@ class App extends React.Component {
 
 
 
+
+
   render() {
     console.log("app", this.state)
     // console.log("beach info", this.state.beachData.results)
@@ -230,12 +241,12 @@ class App extends React.Component {
             <Route path='/signup' render={() => <SignUp setUser={this.setUser} signUpUser={this.signUpUser}/>} />
             <Route path="/login" render={(routerProps) => <Login {...routerProps} loginUser={this.loginUser}/>} />
             <Route path='/map' component={Map} />
-            <Route path='/beach' render={(routerProps) => <Show {...routerProps} currentBeach={this.state.currentBeach} currentUser={this.state.currentUser} allBeaches={this.state.allBeaches}/>} />
+            <Route path='/beach' render={(routerProps) => <Show {...routerProps} currentBeach={this.state.currentBeach} currentUser={this.state.currentUser} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData}/>} />
 
 
 
           </Switch>
-          <Route exact path='/home' render={(routerProps) => <MainContainer {...routerProps} selectBeach={this.selectBeach} beachData={this.state.beachData.results} allBeaches={this.state.allBeaches} currentUser={this.state.currentUser} />} />
+          <Route exact path='/home' render={(routerProps) => <MainContainer {...routerProps} selectBeach={this.selectBeach} beachData={this.state.beachData.results} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData} currentUser={this.state.currentUser} />} />
 
         </div>
 
