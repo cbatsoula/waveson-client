@@ -46,24 +46,24 @@ class MainContainer extends React.Component {
     let arr2 = this.state.beachSaveData.map(fav => {
       return fav
     })
+    let userID = this.props.currentUser.id
     // debugger;
     arr1.forEach((e1) => arr2.forEach((e2) =>
-      {if (e1.id === e2.beach_id){
+      {if (e1.id === e2.beach_id && userID === e2.user_id ){
         // debugger;
         finalArray.push(e1)
       }
     }
   ))
   return finalArray
-  console.log("final array", finalArray)
+  // console.log("final array", finalArray)
   this.setState({
     theFavs: finalArray
   })
   }
 
   render () {
-    console.log("main", this.state.beachSaveData)
-
+    console.log("main", this.state.beachSaveData, this.props.currentUser)
     return (
       <div className="Main-Container">
         <Banner />
@@ -72,7 +72,7 @@ class MainContainer extends React.Component {
         {
           this.state.beachSaveData
           ?
-          <FavContainer selectBeach={this.props.selectBeach} theFavs={this.doTheThing()} />
+          <FavContainer currentUser={this.props.currentUser} selectBeach={this.props.selectBeach} theFavs={this.doTheThing()} />
           :
           null
         }

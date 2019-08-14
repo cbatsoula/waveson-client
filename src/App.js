@@ -235,7 +235,7 @@ class App extends React.Component {
 
 
           </Switch>
-          <Route exact path='/home' render={(routerProps) => <MainContainer {...routerProps} selectBeach={this.selectBeach} beachData={this.state.beachData.results} allBeaches={this.state.allBeaches} />} />
+          <Route exact path='/home' render={(routerProps) => <MainContainer {...routerProps} selectBeach={this.selectBeach} beachData={this.state.beachData.results} allBeaches={this.state.allBeaches} currentUser={this.state.currentUser} />} />
 
         </div>
 

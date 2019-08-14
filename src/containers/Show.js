@@ -71,7 +71,7 @@ class Show extends React.Component {
       <div>
         <div className="Show">
         {this.props.currentBeach.name}
-          <div className="Save-bttn">
+          <div className="button">
           <button onClick={this.saveBeach}>Save</button>
           </div>
         </div>
