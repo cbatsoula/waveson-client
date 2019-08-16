@@ -22,9 +22,14 @@ class NoteStuff extends React.Component {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        "Access-Control-Allow-Methods": "PATCH",
+        "Access-Control-Allow-Origin": "http://localhost"
       },
-      body: JSON.stringify({ note: this.state.note })
+      body: JSON.stringify({
+        note: this.state.note,
+        user_id: this.props.currentUser.id,
+        beach_id: thisOne.id,
+       })
     })
       .then(r => r.json())
       .then(data => {
@@ -111,12 +116,12 @@ class NoteStuff extends React.Component {
     let thisOne = this.props.allBeaches.find(beach => {
       return beach.name === this.props.currentBeach.name
     })
-
+    let userID = this.props.currentUser.id
     fetch('http://localhost:3000/notes')
       .then( r => r.json())
       .then( stuff => {
         let findFromNotes = stuff.filter( note => {
-          return note.beach_id === thisOne.id})
+          return note.beach_id === thisOne.id && note.user_id === userID})
         // console.log("pls", findFromNotes)
         // debugger;
 
@@ -179,7 +184,7 @@ class NoteStuff extends React.Component {
           <textarea
           onChange={this.handleChange}
           name="note"
-          value={this.state.oneNote ? this.state.oneNote.note : this.state.note} 
+          value={this.state.oneNote ? this.state.oneNote.note : this.state.note}
           rows="4"
           cols="50"
           type="text"
