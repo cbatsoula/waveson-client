@@ -6,7 +6,7 @@
   /* font-family: 'Merienda', cursive; */
   /* font-family: 'Lemonada', cursive; */
   font-family: 'Allerta Stencil', sans-serif;
-  
+
 }
 
 button {
@@ -191,6 +191,42 @@ button:active {
 .Login-Form {
   display: flex;
 
+}
+
+.Note-Container {
+
+  display: flex;
+  background-color: #639898;
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: row;
+  padding: 10px;
+  flex-wrap: wrap;
+
+}
+
+.Note-Form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5%;
+  width: 100%;
+}
+
+.Note-Card {
+  display: flex;
+  border-style: outset;
+  padding: 5%;
+  justify-items: space-evenly;
+  background-color: #dee3cc;
+  color: #976224;
+  justify-items: space-evenly;
+  margin: auto;
+  padding: 2%;
+
+  border-radius: 10px;
+  border: 2px outset #6E7B66;
 }
 
 /* .App-logo {

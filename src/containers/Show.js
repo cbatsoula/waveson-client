@@ -1,7 +1,8 @@
 import React from 'react';
 import BeachDetails from './BeachDetails';
 import { Link } from 'react-router-dom';
-
+import Banner from '../components/Banner';
+import NoteStuff from './NoteStuff';
   const WORLD_API_KEY = `${process.env.REACT_APP_WORLD_API_KEY}`
 
 class Show extends React.Component {
@@ -130,6 +131,8 @@ class Show extends React.Component {
           :
           null
         }
+        <Banner title={"Notes"}/>
+        <NoteStuff allBeaches={this.props.allBeaches} currentUser={this.props.currentUser} currentBeach={this.props.currentBeach}/>
       </div>
     )
   }
