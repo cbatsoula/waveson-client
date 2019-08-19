@@ -215,6 +215,8 @@ button:active {
 }
 
 .Note-Card {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
   display: flex;
   border-style: outset;
   /* padding: 2%; */
@@ -222,7 +224,7 @@ button:active {
   background-color: #6d7e82;
   color: #dee3cc;
 
-  margin: auto;
+  margin: 8px;
 
   /* width: 50%; */
   flex-wrap: wrap;

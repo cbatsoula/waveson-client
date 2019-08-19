@@ -9,6 +9,9 @@ class NoteStuff extends React.Component {
     allNotes: null,
     oneNote: null,
     select: false,
+    tag: null,
+    oneTag: null,
+    allTags: null
   }
 
   handleSubmit = event => {
@@ -43,7 +46,6 @@ class NoteStuff extends React.Component {
             return note
           }
         })
-
         this.setState({
           reviews: updatedReview,
           select: false,
@@ -51,6 +53,60 @@ class NoteStuff extends React.Component {
       })
 
   } else {
+    this.postNotes()
+    this.postTags()
+    }
+  };
+
+  // postNoteTag = () => {
+  //   debugger;
+  //   fetch('http://localhost:3000/note_tags', {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       tag: this.state.allTags.last.id,
+  //       note: this.state.allNotes.last.id
+  //     })
+  //   })
+  //     .then( res => res.json())
+  //     .then( console.log )
+  //
+  //
+  // }
+
+  postTags = () => {
+    let thisOne = this.props.allBeaches.find(beach => {
+      return beach.name === this.props.currentBeach.name
+    })
+    fetch(`http://localhost:3000/tags`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        tag: this.state.tag,
+        user_id: this.props.currentUser.id,
+        beach_id: thisOne.id,
+      })
+    })
+      .then( res => res.json())
+      .then( data => {
+        console.log("back from post tag", data)
+        this.setState({
+          tag: "",
+          allTags: [...this.state.allTags, data]
+        }, () => {console.log("POSTED TAG", this.state.allTags)})
+      })
+  }
+
+  postNotes = () => {
+    let thisOne = this.props.allBeaches.find(beach => {
+      return beach.name === this.props.currentBeach.name
+    })
     fetch("http://localhost:3000/notes", {
       method: "POST",
       headers: {
@@ -69,47 +125,24 @@ class NoteStuff extends React.Component {
         this.setState({
           note: "",
           select: false,
-          allNotes: [...this.state.allNotes, data]
-        }, () => {this.fetchNotes()} )
-        console.log("thisOne", thisOne)
+          allNotes: [data, ...this.state.allNotes]
+        }, () => {this.fetchNotes()}
+        // , () => {this.postNoteTag()}
+       )
+        console.log("POSTED NOTE", this.state.allNotes)
 
         // this.setState({
         //   reviews: [...this.state.reviews, data],
         //   select: false,
         // })
       });
-    }
-  };
+  }
 
-  // handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log("SUBMIT")
-  //   let thisOne = this.props.allBeaches.find(beach => {
-  //     return beach.name === this.props.currentBeach.name
-  //   })
-    // fetch(`http://localhost:3000/notes`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Accepts": "application/json"
-    //   },
-    //   body: JSON.stringify({
-    //     note: this.state.note,
-    //     user_id: this.props.currentUser.id,
-    //     beach_id: thisOne.id,
-  //     })
-  //   })
-  //   .then( r => r.json())
-  //   .then(console.log)
-  //
-  //   this.setState({
-  //     note: ""
-  //   }, () => {this.fetchNotes()} )
-  //   console.log("thisOne", thisOne)
-  // }
+
 
   componentDidMount() {
     this.fetchNotes()
+    this.fetchTags()
   }
 
   fetchNotes = () => {
@@ -131,16 +164,29 @@ class NoteStuff extends React.Component {
 
       })
   }
+  fetchTags = () => {
+    let thisOne = this.props.allBeaches.find(beach => {
+      return beach.name === this.props.currentBeach.name
+    })
+    let userID = this.props.currentUser.id
+    fetch('http://localhost:3000/tags')
+      .then( r => r.json())
+      .then( stuff => {
+        let findFromTags = stuff.filter( tag => {
+          return tag.beach_id === thisOne.id && tag.user_id === userID})
 
-  // handleChange = (event) => {
-  //   this.setState({
-  //     [event.target.name]: event.target.value
-  //   })
-  // }
+        this.setState({
+          allTags: findFromTags
+        })
+
+      })
+  }
+
   handleChange = (event) => {
     this.setState({
       oneNote: {...this.state.oneNote, [event.target.name]: event.target.value},
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      oneTag: {...this.state.oneTag, [event.target.name]: event.target.value},
     });
   };
 
@@ -189,6 +235,14 @@ class NoteStuff extends React.Component {
           cols="50"
           type="text"
           placeholder="Start your entry here!"/>
+          <textarea
+          onChange={this.handleChange}
+          name="tag"
+          value={this.state.oneTag ? this.state.oneTag.tag : this.state.tag}
+          rows="4"
+          cols="50"
+          type="text"
+          placeholder="tags"/>
           <input type="submit" value="Submit" />
         </form>
       {
