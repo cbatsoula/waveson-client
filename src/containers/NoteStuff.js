@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NoteCard from '../components/NoteCard';
+import PhotoUpload from './PhotoUpload';
+import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
+import cloudinary from 'cloudinary-react';
+
 
 class NoteStuff extends React.Component {
 
@@ -11,11 +15,15 @@ class NoteStuff extends React.Component {
     select: false,
     tag: null,
     oneTag: null,
-    allTags: null
+    allTags: null,
+    photoInfo: null,
   }
+
 
   handleSubmit = event => {
   event.preventDefault();
+
+
   let thisOne = this.props.allBeaches.find(beach => {
     return beach.name === this.props.currentBeach.name
   })
@@ -58,25 +66,6 @@ class NoteStuff extends React.Component {
     }
   };
 
-  // postNoteTag = () => {
-  //   debugger;
-  //   fetch('http://localhost:3000/note_tags', {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       tag: this.state.allTags.last.id,
-  //       note: this.state.allNotes.last.id
-  //     })
-  //   })
-  //     .then( res => res.json())
-  //     .then( console.log )
-  //
-  //
-  // }
-
   postTags = () => {
     let thisOne = this.props.allBeaches.find(beach => {
       return beach.name === this.props.currentBeach.name
@@ -107,6 +96,7 @@ class NoteStuff extends React.Component {
     let thisOne = this.props.allBeaches.find(beach => {
       return beach.name === this.props.currentBeach.name
     })
+    let thisPhoto = this.state.photoInfo[0].secure_url
     fetch("http://localhost:3000/notes", {
       method: "POST",
       headers: {
@@ -117,6 +107,7 @@ class NoteStuff extends React.Component {
         note: this.state.note,
         user_id: this.props.currentUser.id,
         beach_id: thisOne.id,
+        photo: thisPhoto,
       })
     })
       .then(res => res.json())
@@ -219,12 +210,38 @@ class NoteStuff extends React.Component {
     })
   }
 
+  setShit = (result) => {
+    console.log("bro what", result)
+    this.setState({
+      photoInfo: result
+    })
+  }
+
+  uploadWidget() {
+    window.cloudinary.openUploadWidget({ cloud_name: 'dlybpe5za', upload_preset: 'waveson'},
+        (error, result) => {
+            console.log(result);
+            if (result) {
+              this.setShit(result)
+            }
+
+        });
+      }
+
+      // <Image cloudName="dlybpe5za" publicId="sample" width="300" crop="scale" />
   render () {
     console.log("note", this.state)
     console.log("note props", this.props)
     return (
       <div className="Note-Container">
-        Im a note container
+      <h1>Galleria</h1>
+            <div className="upload">
+                <button onClick={this.uploadWidget.bind(this)} className="upload-button">
+                    Add Image
+                </button>
+            </div>
+        PhotoUpload
+
         <form className="Note-Form" onSubmit={this.handleSubmit}>
           <br />
           <textarea

@@ -19,7 +19,7 @@ class NoteCard extends React.Component {
   }
 
   render () {
-    // console.log(" note card props ", this.props)
+    console.log(" note card props ", this.props)
     return (
       <div className="Note-Card">
         <div className="Note-Text">
@@ -28,6 +28,13 @@ class NoteCard extends React.Component {
         <p>{this.formatDate()}</p>
         <p>Tags: {this.renderTags()}</p>
         </div>
+        {
+          this.props.note.photo
+          ?
+          <img src={this.props.note.photo} width="500" crop="scale" />
+          :
+          null
+        }
 
         <button classname="button" onClick={() => {this.props.handleDelete(this.props.note)}}>Delete Entry</button>
         <button classname="button" onClick={() => {this.props.handleEdit(this.props.note)}}>Edit Entry</button>

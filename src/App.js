@@ -241,6 +241,7 @@ class App extends React.Component {
 
         <div className="App">
           <Nav logout={this.logout} currentUser={this.state.currentUser} />
+          
           <Switch>
 
             <Route path='/signup' render={() => <SignUp setUser={this.setUser} signUpUser={this.signUpUser}/>} />

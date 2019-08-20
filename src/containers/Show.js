@@ -3,6 +3,8 @@ import BeachDetails from './BeachDetails';
 import { Link } from 'react-router-dom';
 import Banner from '../components/Banner';
 import NoteStuff from './NoteStuff';
+// import why from './why.html';
+
   const WORLD_API_KEY = `${process.env.REACT_APP_WORLD_API_KEY}`
 
 class Show extends React.Component {
@@ -117,6 +119,9 @@ class Show extends React.Component {
     console.log("all beaches from api", this.props.allBeaches)
     return (
       <div>
+        <div className="map">
+
+        </div>
         <div className="Show">
         {this.props.currentBeach.name}
           <div className="button">
