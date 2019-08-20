@@ -23,6 +23,9 @@ class Login extends React.Component {
   render(){
     return (
       <div className="App">
+        <div className="Space">
+
+        </div>
         <div className="Login-Container">
           <h3>LOGIN</h3>
           <div className="Login-Sub">

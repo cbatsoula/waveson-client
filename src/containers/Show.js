@@ -118,15 +118,13 @@ class Show extends React.Component {
     console.log("user", this.props.currentUser)
     console.log("all beaches from api", this.props.allBeaches)
     return (
-      <div>
-        <div className="map">
+      <div className="Show">
 
-        </div>
-        <div className="Show">
-        {this.props.currentBeach.name}
+        <div className="Show-Details">
+          {this.props.currentBeach.name}
           <div className="button">
-          <button onClick={this.saveBeach}>Save</button>
-          <button onClick={this.removeBeach}>Remove</button>
+          <button onClick={this.saveBeach}>SAVE</button>
+          <button onClick={this.removeBeach}>REMOVE</button>
           </div>
         </div>
         {

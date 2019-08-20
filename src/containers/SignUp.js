@@ -31,14 +31,17 @@ class SignUp extends React.Component {
   render(){
     console.log("sign up", this.state)
     return (
-      <div className="Login-Container">
-        <div className="Login-Subcontainer">
+      <div className="App">
+      <div className="Space">
+
+      </div>
+        <div className="Signup-Container">
         <h3>SIGN UP</h3>
         <form className="Login-Form" onSubmit={this.handleSubmit}>
           <input onChange={this.handleInput} type="text" name="name" value={this.state.name} placeholder="Name"/>
           <input onChange={this.handleInput} type="text" name="username" value={this.state.username} placeholder="Username"/>
           <input onChange={this.handleInput} type="password" name="password" value={this.state.password} placeholder="Password"/>
-          <input onChange={this.handleInput} type="password" name="passwordConfirmation" value={this.state.passwordConfirmation} placeholder="Password Confirmation"/>
+          <input onChange={this.handleInput} type="password" name="passwordConfirmation" value={this.state.passwordConfirmation} placeholder="Confirm Password"/>
           <input type="submit" value="SIGN UP" />
         </form>
         </div>

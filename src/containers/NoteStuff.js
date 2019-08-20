@@ -17,6 +17,8 @@ class NoteStuff extends React.Component {
     oneTag: null,
     allTags: null,
     photoInfo: null,
+    loading: false,
+    idkmydude: null,
   }
 
 
@@ -44,10 +46,9 @@ class NoteStuff extends React.Component {
     })
       .then(r => r.json())
       .then(data => {
-        console.log("one review", this.state.oneReview)
         console.log("data", data)
         //update one object in state array
-        let updatedReview = this.state.allNotes.map(note => {
+        let updatedNotes = this.state.allNotes.map(note => {
           if (note.id === this.state.oneNote.id){
             return this.state.oneNote
           } else {
@@ -55,7 +56,8 @@ class NoteStuff extends React.Component {
           }
         })
         this.setState({
-          reviews: updatedReview,
+          note: "",
+          allNotes: updatedNotes,
           select: false,
         })
       })
@@ -92,11 +94,19 @@ class NoteStuff extends React.Component {
       })
   }
 
+  ifPhoto = () => {
+    if (this.state.photoInfo){
+      return this.state.photoInfo[0].secure_url
+    } else {
+      return null
+    }
+  }
+
   postNotes = () => {
     let thisOne = this.props.allBeaches.find(beach => {
       return beach.name === this.props.currentBeach.name
     })
-    let thisPhoto = this.state.photoInfo[0].secure_url
+    // let thisPhoto = this.state.photoInfo[0].secure_url
     fetch("http://localhost:3000/notes", {
       method: "POST",
       headers: {
@@ -107,17 +117,18 @@ class NoteStuff extends React.Component {
         note: this.state.note,
         user_id: this.props.currentUser.id,
         beach_id: thisOne.id,
-        photo: thisPhoto,
+        photo: this.ifPhoto(),
       })
     })
       .then(res => res.json())
       .then(data => {
+        this.fetchNotes()
         console.log("back from post", data)
         this.setState({
-          note: "",
+          note: " ",
           select: false,
           allNotes: [data, ...this.state.allNotes]
-        }, () => {this.fetchNotes()}
+        }
         // , () => {this.postNoteTag()}
        )
         console.log("POSTED NOTE", this.state.allNotes)
@@ -213,11 +224,17 @@ class NoteStuff extends React.Component {
   setShit = (result) => {
     console.log("bro what", result)
     this.setState({
-      photoInfo: result
+      photoInfo: result,
+      loading: null,
+      idkmydude: "Photo selected and ready to upload!"
+
     })
   }
 
   uploadWidget() {
+    this.setState({
+      loading: true,
+    })
     window.cloudinary.openUploadWidget({ cloud_name: 'dlybpe5za', upload_preset: 'waveson'},
         (error, result) => {
             console.log(result);
@@ -234,17 +251,30 @@ class NoteStuff extends React.Component {
     console.log("note props", this.props)
     return (
       <div className="Note-Container">
-      <h1>Galleria</h1>
             <div className="upload">
                 <button onClick={this.uploadWidget.bind(this)} className="upload-button">
-                    Add Image
+                    ADD IMAGE
                 </button>
+                {
+                  this.state.loading
+                  ?
+                  <h4>Loading...</h4>
+                  :
+                  <h4>Select</h4>
+                }
+                {
+                  this.state.idkmydude
+                  ?
+                  this.state.idkmydude
+                  :
+                  null
+                }
             </div>
-        PhotoUpload
 
         <form className="Note-Form" onSubmit={this.handleSubmit}>
           <br />
           <textarea
+          id="styled"
           onChange={this.handleChange}
           name="note"
           value={this.state.oneNote ? this.state.oneNote.note : this.state.note}
@@ -252,15 +282,13 @@ class NoteStuff extends React.Component {
           cols="50"
           type="text"
           placeholder="Start your entry here!"/>
-          <textarea
+          <input
           onChange={this.handleChange}
           name="tag"
-          value={this.state.oneTag ? this.state.oneTag.tag : this.state.tag}
-          rows="4"
-          cols="50"
           type="text"
+          value={this.state.oneTag ? this.state.oneTag.tag : this.state.tag}
           placeholder="tags"/>
-          <input type="submit" value="Submit" />
+          <input className="button" type="submit" value="Submit" />
         </form>
       {
         this.state.allNotes

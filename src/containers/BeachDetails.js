@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Hourly from '../components/Hourly'
 class BeachDetails extends React.Component {
 
   state = {
@@ -37,16 +37,37 @@ class BeachDetails extends React.Component {
   }
 
   renderWeather = (param) => {
-    switch(param) {
+    switch(this.state.selected) {
       case 'one':
-        console.log("fuck you buddy")
-        return 'bar';
+        console.log("one")
+        return <Hourly weather={this.state.one}/>;
+      case 'two':
+        console.log("two")
+        return <Hourly weather={this.state.two}/>;
+      case 'three':
+        console.log("three")
+        return <Hourly weather={this.state.three}/>;
+      case 'four':
+        console.log("four")
+        return <Hourly weather={this.state.four}/>;
+      case 'five':
+        console.log("five")
+        return <Hourly weather={this.state.five}/>;
+      case 'six':
+        console.log("six")
+        return <Hourly weather={this.state.six}/>;
+
+      case 'seven':
+        console.log("seven")
+        return <Hourly weather={this.state.seven}/>;
+      case 'eight':
+        console.log("eight")
+        return <Hourly weather={this.state.eight}/>;
       default:
-        return 'foo';
+        return null;
     }
 
   }
-
 
   wht = (e) => {
    this.setState({selected: e.target.value}, () => this.renderWeather(this.state.selected));
@@ -56,6 +77,22 @@ class BeachDetails extends React.Component {
     console.log("im pissed off", this.state)
     console.log("deets", this.props)
     return (
+      <>
+      <div className="Hourly-Time">
+        Select Time
+
+        <select name="select" onChange={this.wht}>
+        <option value={"zero"}>select</option>
+        <option value={"one"}>12am - 3am</option>
+        <option value={"two"}>3am - 6am</option>
+        <option value={"three"}>6am - 9am</option>
+        <option value={"four"}>9am - 12pm</option>
+        <option value={"five"}>12pm - 3pm</option>
+        <option value={"six"}>3pm - 5pm</option>
+        <option value={"seven"}>5pm - 9pm</option>
+        <option value={"eight"}>9pm - 12am</option>
+        </select>
+      </div>
       <div className="Beach-Details">
         <ul>
           <li>Today's High F: {this.props.today.maxtempF}</li>
@@ -70,40 +107,12 @@ class BeachDetails extends React.Component {
           <li>Moon illumination: {this.props.today.astronomy[0].moon_illumination}%</li>
 
         </ul>
-        {
-          this.state.selected === "three"
-          ?
-          (<ul>
-            <li>Today's High F: {this.props.today.maxtempF}</li>
-            <li>Today's High C: {this.props.today.maxtempC}</li>
-            <li>Today's Low F: {this.props.today.mintempF}</li>
-            <li>Today's Low C: {this.props.today.mintempC}</li>
-            <li>Sunset: {this.props.today.astronomy[0].sunset}</li>
-            <li>Sunrise: {this.props.today.astronomy[0].sunrise}</li>
-            <li>Moonrise: {this.props.today.astronomy[0].moonrise}</li>
-            <li>Moonset: {this.props.today.astronomy[0].moonset}</li>
-            <li>Moon phase: {this.props.today.astronomy[0].moon_phase}</li>
-            <li>Moon illumination: {this.props.today.astronomy[0].moon_illumination}%</li>
-
-          </ul>)
-          :
-          null
-        }
-
-
-
-
-        <select name="select" onChange={this.wht}>
-          <option value={"one"}>fuck you</option>
-          <option value={"two"}>fuck you</option>
-          <option value={"three"}>fuck you</option>
-          <option value={"four"}>fuck you</option>
-          <option value={"five"}>fuck you</option>
-          <option value={"six"}>fuck you</option>
-          <option value={"seven"}>fuck you</option>
-        </select>
+        <div className="Hourly">
+          {this.renderWeather()}
+        </div>
 
       </div>
+      </>
     )
   }
 }
