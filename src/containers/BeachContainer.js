@@ -11,7 +11,7 @@ class BeachContainer extends React.Component {
   }
 
   render () {
-    console.log("beach container", this.props.beachData)
+    // console.log("beach container", this.props.beachData)
     return (
       <div className="Beach-Container">
 

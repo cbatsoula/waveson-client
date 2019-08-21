@@ -25,8 +25,9 @@ class App extends React.Component {
     currentUser: null,
     currentBeach: null,
     allBeaches: [],
-    beachSaveData: null,
     allNotes: null,
+    beachSaveData: null,
+    theFavs: [],
   }
 
 
@@ -62,6 +63,17 @@ class App extends React.Component {
 
   }
 
+  fetchFavs = () => {
+    fetch('http://localhost:3000/favs')
+      .then( r => r.json())
+      .then( data => {
+          // console.log("wtf my dude", data)
+        this.setState({
+          beachSaveData: data
+        }, () => this.doTheThing())
+      })
+  }
+
   componentDidMount() {
 
     fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${API_KEY}`, {
@@ -81,14 +93,7 @@ class App extends React.Component {
           allBeaches: allBeaches
         })
       })
-    fetch('http://localhost:3000/favs')
-      .then( r => r.json())
-      .then( data => {
-          // console.log("wtf my dude", data)
-        this.setState({
-          beachSaveData: data
-        })
-      })
+    this.fetchFavs()
     fetch('http://localhost:3000/notes')
       .then( r => r.json())
       .then( stuff => {
@@ -107,23 +112,7 @@ class App extends React.Component {
   beachesFromUserLoc() {
     let userLat = this.state.userLoc.lat.toString()
     let userLng = this.state.userLoc.lng.toString()
-    // fetch('http://localhost:3000/users/1', {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Accept": "application/json",
-    //     'Access-Control-Allow-Origin': '*'
-    //   },
-    //   body: JSON.stringify({
-    //     location: this.state.userLoc
-    //   })
-    // })
-    //   .then(r => r.json())
-    //   .then(data => {
-    //     console.log("patch location", data)
-    //   })
-    //
-    // console.log("uh", userLat, userLng)
+
     fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLat},${userLng}&radius=21000&type=natural_feature&keyword=beach&key=${API_KEY}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -139,18 +128,6 @@ class App extends React.Component {
   }
 
   postBeaches() {
-    // let beachLat = this.state.beachData.results.map(beach => {
-    //   return beach.geometry.location.lat.toString()
-    // })
-    // let beachLng = this.state.beachData.results.map(beach => {
-    //   return beach.geometry.location.lng.toString()
-    // })
-    // let beachIndex = this.state.beachData.results.map((beach, index) => {
-    //   return index + 1
-    // })
-    // console.log("post beaches", beachLat, beachIndex)
-
-
     this.state.beachData.results.map(beach => {
       return fetch('http://localhost:3000/beaches', {
       method: "POST",
@@ -202,19 +179,6 @@ class App extends React.Component {
 
   }
 
-  hideNseek() {
-    if (!this.state.beachData.results) {
-      console.log("not yet", this.state)
-    } else if (this.state.currentBeach) {
-      return <Route path='/beach' render={(routerProps) => <Show currentBeach={this.state.currentBeach}/>} />
-
-    }
-    // else if (this.state.beachData.results.length > 1) {
-    //   console.log("HIDE AND SEEK", this.state.beachData.results.length)
-    //   return <Route path='/home' render={(routerProps) => <MainContainer selectBeach={this.selectBeach} beachData={this.state.beachData.results} />} />
-    //
-    // }
-  }
 
   loginUser = (input) => {
     fetch('http://localhost:3000/login', {
@@ -251,15 +215,6 @@ class App extends React.Component {
     })
   }
 
-  holdThis = () => {
-    // {
-    //   this.state.currentBeach
-    //   ?
-    //   <Show currentBeach={this.state.currentBeach}/>
-    //   :
-    //   this.hideNseek()
-    // }
-  }
 
   logout = () => {
     this.setState({
@@ -268,6 +223,95 @@ class App extends React.Component {
     this.props.history.push("/login")
    }
 
+   doTheThing = () => {
+     const finalArray = [];
+     let arr1 = this.state.allBeaches.map(beach => {
+       return beach
+     })
+     let arr2 = this.state.beachSaveData.map(fav => {
+       return fav
+     })
+
+     // debugger
+     if (this.state.currentUser){
+       let userID = this.state.currentUser.id
+       arr1.forEach((e1) => arr2.forEach((e2) =>
+         {if (e1.id === e2.beach_id && userID === e2.user_id ){
+           // debugger;
+           finalArray.push(e1)
+         }
+       }
+     ))
+     return finalArray
+     // console.log("final array", finalArray)
+     this.setState({
+       theFavs: finalArray
+     })
+     }
+
+   }
+
+
+     saveBeach = () => {
+       console.log("you got this!", this.state.currentUser, this.state.currentBeach)
+
+       let thisOne = this.state.allBeaches.find(beach => {
+         return beach.name === this.state.currentBeach.name
+       })
+
+       let userID = this.state.currentUser.id
+       console.log("save beach", thisOne)
+       let favCheck = this.state.theFavs.find(beach => {return beach.id === thisOne.id})
+
+       // let favCheck = this.state.beachSaveData.find(beach => {
+       //   return beach.id === thisOne.id && beach.user_id === userID})
+
+       console.log("wut", thisOne && !favCheck)
+       // debugger;
+       if (thisOne && !favCheck){
+         fetch('http://localhost:3000/favs', {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+             "Accept": "application/json",
+           },
+           body: JSON.stringify({
+             user_id: this.state.currentUser.id,
+             beach_id: thisOne.id,
+           })
+         })
+           .then(r => r.json())
+           .then(data => {
+             this.fetchFavs()
+           })
+       }
+     }
+
+     removeBeach = () => {
+       console.log("remove", this.state.beachSaveData )
+       let userID = this.state.currentUser.id
+       let thisOne = this.state.allBeaches.find(beach => {
+         return beach.name === this.state.currentBeach.name
+       })
+       let favID = this.state.beachSaveData.find(fav => {
+         return fav.user_id === userID && fav.beach_id === thisOne.id
+           // console.log("remove favID", favID)
+         })
+
+         fetch(`http://localhost:3000/favs/${favID.id}`, {
+           method: "DELETE",
+           headers: {
+             "Content-Type": "application/json",
+             "Access-Control-Allow-Methods": "DELETE",
+             "Access-Control-Allow-Origin": "http://localhost"
+           //   "Accept": "application/json",
+           },
+         })
+           .then(r => r.json())
+           .then(data => {
+             this.fetchFavs()
+           })
+       }
 
 
   render() {
@@ -283,12 +327,12 @@ class App extends React.Component {
             <Route path='/signup' render={() => <SignUp setUser={this.setUser} signUpUser={this.signUpUser}/>} />
             <Route path="/login" render={(routerProps) => <Login {...routerProps} loginUser={this.loginUser}/>} />
             <Route path='/map' component={Map} />
-            <Route path='/beach' render={(routerProps) => <Show {...routerProps} currentBeach={this.state.currentBeach} currentUser={this.state.currentUser} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData}/>} />
+            <Route path='/beach' render={(routerProps) => <Show {...routerProps} currentBeach={this.state.currentBeach} currentUser={this.state.currentUser} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData} doTheThing={this.doTheThing} theFavs={this.doTheThing()} saveBeach={this.saveBeach} removeBeach={this.removeBeach}/>} />
 
             <Route path="/notes" render={(routerProps) => <AllNotes {...routerProps} fetchNotes={this.fetchNotes} currentUser={this.state.currentUser} allNotes={this.state.allNotes} />} />
 
           </Switch>
-          <Route exact path='/home' render={(routerProps) => <MainContainer {...routerProps} selectBeach={this.selectBeach} beachData={this.state.beachData.results} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData} currentUser={this.state.currentUser} />} />
+          <Route exact path='/home' render={(routerProps) => <MainContainer {...routerProps} selectBeach={this.selectBeach} beachData={this.state.beachData.results} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData} currentUser={this.state.currentUser} doTheThing={this.doTheThing} theFavs={this.state.theFavs} />} />
 
         </div>
 

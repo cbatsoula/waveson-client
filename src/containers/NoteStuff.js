@@ -140,8 +140,6 @@ class NoteStuff extends React.Component {
       });
   }
 
-
-
   componentDidMount() {
     this.fetchNotes()
     this.fetchTags()
@@ -193,7 +191,7 @@ class NoteStuff extends React.Component {
   };
 
   handleEdit = (thing) => {
-  console.log("one review", thing, thing.id)
+  console.log("one note", thing, thing.id)
     this.setState({
       oneNote: thing,
       select: true
@@ -222,7 +220,7 @@ class NoteStuff extends React.Component {
   }
 
   setShit = (result) => {
-    console.log("bro what", result)
+    // console.log("bro what", result)
     this.setState({
       photoInfo: result,
       loading: null,
@@ -237,7 +235,7 @@ class NoteStuff extends React.Component {
     })
     window.cloudinary.openUploadWidget({ cloud_name: 'dlybpe5za', upload_preset: 'waveson'},
         (error, result) => {
-            console.log(result);
+            // console.log(result);
             if (result) {
               this.setShit(result)
             }
@@ -247,8 +245,8 @@ class NoteStuff extends React.Component {
 
       // <Image cloudName="dlybpe5za" publicId="sample" width="300" crop="scale" />
   render () {
-    console.log("note", this.state)
-    console.log("note props", this.props)
+    // console.log("note", this.state)
+    // console.log("note props", this.props)
     return (
       <div className="Note-Container">
             <div className="upload">
