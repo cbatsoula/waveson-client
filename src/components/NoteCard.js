@@ -19,7 +19,8 @@ class NoteCard extends React.Component {
   }
 
   render () {
-    console.log(" note card props ", this.props)
+    // console.log(" note card props ", this.props)
+    console.log("note card", window.location)
     return (
       <div className="Note-Card">
         <div className="Note-Text">
@@ -37,8 +38,19 @@ class NoteCard extends React.Component {
           null
         }
 
-        <button classname="button" onClick={() => {this.props.handleDelete(this.props.note)}}>DELETE</button>
-        <button classname="button" onClick={() => {this.props.handleEdit(this.props.note)}}>EDIT</button>
+        {
+          window.location.pathname === "/notes"
+          ?
+          null
+          :
+          <>
+            <button classname="button" onClick={() => {this.props.handleDelete(this.props.note)}}>DELETE</button>
+            <button classname="button" onClick={() => {this.props.handleEdit(this.props.note)}}>EDIT</button>
+          </>
+
+        }
+
+
 
       </div>
     )

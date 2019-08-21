@@ -9,27 +9,39 @@
 
 }
 
+
+
+
 button {
+  height: 8vh;
+  width: 15vw;
+  align-items: flex-end;
+
   display: inline-block;
-  width: 83%;
   background-color: #3f406e;
   border: none;
   color: white;
-  /* padding: 16px 32px; */
   text-decoration: none;
-  margin: 4px 2px;
+  /* margin: 4px 2px; */
   cursor: pointer;
   font-size: 20px;
   font-family: Tahoma, sans-serif;
-  margin: 5px;
+  margin: 8px;
   border-radius: 10px;
   border-color: #c9a865 #6b5882 #3f406e #a8ab61;
   font-family: 'IM Fell English', serif;
-  padding: 1rem 2rem;
   text-align: center;
   transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
+  box-shadow: 0 7px 0 #476e6e;;
+
+  /* display: flex; */
+  /* padding: 5%; */
+  /* justify-content: space-between; */
+  /* width: 83%; */
+  /* padding: 16px 32px; */
+  /* padding: 1rem 2rem; */
 
     /* display: inline-block;
     border-radius: 10px;
@@ -49,25 +61,7 @@ button {
     -webkit-appearance: none;
     -moz-appearance: none; */
 }
-/* .button:after {
-  content: "";
-  background: #90EE90;
-  display: block;
-  position: absolute;
-  padding-top: 300%;
-  padding-left: 350%;
-  margin-left: -20px!important;
-  margin-top: -120%;
-  opacity: 0;
-  transition: all 0.8s
-}
 
-.button:active:after {
-  padding: 0;
-  margin: 0;
-  opacity: 1;
-  transition: 0s
-} */
 button:hover,
 button:focus {
     background: #d18d45;
@@ -79,7 +73,8 @@ button:focus {
 }
 
 button:active {
-    transform: scale(0.99);
+    box-shadow: none;
+    transform: scale(0.88);
 }
 
 
@@ -93,10 +88,20 @@ button:active {
   font-size: 35px;
   border-style: hidden hidden solid;
   border-color: #3f4a38;
-  color: #dee3cc;
+  /* color: #dee3cc; */
   margin: auto;
   background-image: url("/MVIMG_20190818_175135.jpg");
   background-size: cover;
+
+}
+.logo {
+  color: #dee3cc;
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: #3f4a38;
+  text-decoration: none;
 }
 
 .Nav-bttns {
@@ -186,7 +191,7 @@ button:active {
   width: 100%;
   height: 100%;
   font-size: 33px;
-  justify-content: space-evenly;
+  justify-content: center;
   /* margin: auto; */
   padding: 1%;
 
@@ -319,9 +324,9 @@ button:active {
 
   display: flex;
   background-color: #639898;
-  height: 100%;
-  width: 100%;
-  justify-content: stretch;
+
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
   padding: 10px;
   flex-wrap: wrap;
@@ -332,6 +337,7 @@ button:active {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 2%;
   width: 100%;
 }
@@ -341,16 +347,16 @@ button:active {
   transition: 0.3s;
   display: flex;
   border-style: outset;
-  /* padding: 2%; */
+  padding: 2%;
   justify-items: space-evenly;
   background-color: #6d7e82;
   color: #dee3cc;
 
   margin: 30px;
-
-  /* width: 50%; */
-  flex-wrap: wrap;
-  flex-direction: row;
+  height: 60%;
+  width: 90%;
+  /* flex-wrap: wrap; */
+  flex-direction: column;
   border-radius: 10px;
   border: 2px outset #6E7B66;
 
@@ -359,6 +365,7 @@ button:active {
   flex-basis: 45%;
 
   align-self: stretch;
+  align-items: center;
 }
 
 .Note-Text {

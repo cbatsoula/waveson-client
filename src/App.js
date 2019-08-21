@@ -8,6 +8,7 @@ import SignUp from './containers/SignUp';
 import Login from './containers/Login';
 import Show from './containers/Show';
 import Map from './components/Map';
+import AllNotes from './containers/AllNotes';
 
 
 // import { Link } from 'react-router-dom';
@@ -25,6 +26,28 @@ class App extends React.Component {
     currentBeach: null,
     allBeaches: [],
     beachSaveData: null,
+    allNotes: null,
+  }
+
+
+  fetchNotes = () => {
+    // let thisOne = this.state.allBeaches.find(beach => {
+    //   return beach.name === this.state.currentBeach.name
+    // })
+    // let userID = this.state.currentUser.id
+    fetch('http://localhost:3000/notes')
+      .then( r => r.json())
+      .then( stuff => {
+        // let findFromNotes = stuff.filter( note => {
+        //   return note.beach_id === thisOne.id && note.user_id === userID})
+        // console.log("pls", findFromNotes)
+        // debugger;
+
+        this.setState({
+          allNotes: stuff
+        })
+
+      })
   }
 
   selectBeach = (propsName) => {
@@ -65,6 +88,19 @@ class App extends React.Component {
         this.setState({
           beachSaveData: data
         })
+      })
+    fetch('http://localhost:3000/notes')
+      .then( r => r.json())
+      .then( stuff => {
+          // let findFromNotes = stuff.filter( note => {
+          //   return note.beach_id === thisOne.id && note.user_id === userID})
+          // console.log("pls", findFromNotes)
+          // debugger;
+
+        this.setState({
+          allNotes: stuff
+        })
+
       })
   }
 
@@ -241,7 +277,7 @@ class App extends React.Component {
 
         <div className="App">
           <Nav logout={this.logout} currentUser={this.state.currentUser} />
-          
+
           <Switch>
 
             <Route path='/signup' render={() => <SignUp setUser={this.setUser} signUpUser={this.signUpUser}/>} />
@@ -249,7 +285,7 @@ class App extends React.Component {
             <Route path='/map' component={Map} />
             <Route path='/beach' render={(routerProps) => <Show {...routerProps} currentBeach={this.state.currentBeach} currentUser={this.state.currentUser} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData}/>} />
 
-
+            <Route path="/notes" render={(routerProps) => <AllNotes {...routerProps} fetchNotes={this.fetchNotes} currentUser={this.state.currentUser} allNotes={this.state.allNotes} />} />
 
           </Switch>
           <Route exact path='/home' render={(routerProps) => <MainContainer {...routerProps} selectBeach={this.selectBeach} beachData={this.state.beachData.results} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData} currentUser={this.state.currentUser} />} />

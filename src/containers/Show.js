@@ -65,20 +65,6 @@ class Show extends React.Component {
     }
   }
 
-//   handleDelete = (thing) => {
-//   console.log("delete this review", thing.id)
-//   fetch(`http://localhost:3000/reviews/${thing.id}`, {
-//     method: "DELETE",
-//   })
-//     .then( r => r.json())
-//     .then( data => {
-//       console.log("removed", data)
-//       var newItems = this.state.reviews.filter((review) => {
-//         return review.id !== thing.id});
-//     this.setState({ reviews: newItems });
-//     })
-// }
-
   removeBeach = () => {
     console.log("remove", this.props.beachSaveData )
     let userID = this.props.currentUser.id
@@ -114,18 +100,18 @@ class Show extends React.Component {
 
       // {this.state.stats.data.weather[0].astronomy.sunrise}
   render () {
-    console.log("SHOW STATE", this.state)
-    console.log("user", this.props.currentUser)
-    console.log("all beaches from api", this.props.allBeaches)
+    // console.log("SHOW STATE", this.state)
+    // console.log("user", this.props.currentUser)
+    // console.log("all beaches from api", this.props.allBeaches)
     return (
       <div className="Show">
 
         <div className="Show-Details">
           {this.props.currentBeach.name}
-          <div className="button">
+      
           <button onClick={this.saveBeach}>SAVE</button>
           <button onClick={this.removeBeach}>REMOVE</button>
-          </div>
+
         </div>
         {
           this.state.today
