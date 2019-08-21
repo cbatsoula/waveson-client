@@ -251,7 +251,7 @@ class NoteStuff extends React.Component {
       <div className="Note-Container">
             <div className="upload">
                 <button onClick={this.uploadWidget.bind(this)} className="upload-button">
-                    ADD IMAGE
+                    📷 ADD IMAGE 📸 
                 </button>
                 {
                   this.state.loading

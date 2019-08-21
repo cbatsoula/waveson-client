@@ -32,7 +32,7 @@ class Login extends React.Component {
             <form className="Login-Form" onSubmit={this.handleSubmit}>
               <input onChange={this.handleInput} type="text" name="username" value={this.state.username} placeholder="Username"/>
               <input onChange={this.handleInput} type="password" name="password" value={this.state.password} placeholder="Password"/>
-              <input type="submit" value="LOGIN" />
+              <input type="submit" value="🗝  LOG IN" />
             </form>
           </div>
         </div>

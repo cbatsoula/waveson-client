@@ -34,7 +34,9 @@ button {
   transition: background 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
-  box-shadow: 0 7px 0 #476e6e;;
+  box-shadow: 0 7px 0 #476e6e;
+  /* box-shadow: 0 4px 5px 0 rgba(0, 0, 0.5, 0.5);
+  transition: 0.5s; */
 
   /* display: flex; */
   /* padding: 5%; */
