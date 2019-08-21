@@ -46,7 +46,7 @@ class NoteStuff extends React.Component {
     })
       .then(r => r.json())
       .then(data => {
-        console.log("data", data)
+        // console.log("data", data)
         //update one object in state array
         let updatedNotes = this.state.allNotes.map(note => {
           if (note.id === this.state.oneNote.id){
@@ -123,7 +123,7 @@ class NoteStuff extends React.Component {
       .then(res => res.json())
       .then(data => {
         this.fetchNotes()
-        console.log("back from post", data)
+        // console.log("back from post", data)
         this.setState({
           note: " ",
           select: false,
@@ -131,7 +131,7 @@ class NoteStuff extends React.Component {
         }
         // , () => {this.postNoteTag()}
        )
-        console.log("POSTED NOTE", this.state.allNotes)
+        // console.log("POSTED NOTE", this.state.allNotes)
 
         // this.setState({
         //   reviews: [...this.state.reviews, data],
@@ -191,7 +191,7 @@ class NoteStuff extends React.Component {
   };
 
   handleEdit = (thing) => {
-  console.log("one note", thing, thing.id)
+  // console.log("one note", thing, thing.id)
     this.setState({
       oneNote: thing,
       select: true
@@ -200,7 +200,7 @@ class NoteStuff extends React.Component {
   }
 
   handleDelete = (thing) => {
-  console.log("delete this review", thing.id)
+  // console.log("delete this review", thing.id)
    fetch(`http://localhost:3000/notes/${thing.id}`, {
      method: "DELETE",
    })

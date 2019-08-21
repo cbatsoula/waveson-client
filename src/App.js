@@ -27,7 +27,7 @@ class App extends React.Component {
     allBeaches: [],
     allNotes: null,
     beachSaveData: null,
-    theFavs: [],
+    theFavs: null,
   }
 
 
@@ -81,7 +81,6 @@ class App extends React.Component {
     })
       .then(r => r.json())
       .then(data => {
-        console.log(process.env.REACT_APP_GOOGLE_API_KEY)
         this.setState({
           userLoc: data.location
         }, () => {this.beachesFromUserLoc()})
@@ -244,9 +243,10 @@ class App extends React.Component {
      ))
      return finalArray
      // console.log("final array", finalArray)
+     console.log("ONLY FUCKING NOW MY DUDE?")
      this.setState({
        theFavs: finalArray
-     })
+     }, () => {console.log("ONLY FUCKING NOW MY DUDE?", this.state.theFavs)})
      }
 
    }
@@ -261,7 +261,7 @@ class App extends React.Component {
 
        let userID = this.state.currentUser.id
        console.log("save beach", thisOne)
-       let favCheck = this.state.theFavs.find(beach => {return beach.id === thisOne.id})
+       let favCheck = this.doTheThing().find(beach => {return beach.id === thisOne.id})
 
        // let favCheck = this.state.beachSaveData.find(beach => {
        //   return beach.id === thisOne.id && beach.user_id === userID})
@@ -332,7 +332,7 @@ class App extends React.Component {
             <Route path="/notes" render={(routerProps) => <AllNotes {...routerProps} fetchNotes={this.fetchNotes} currentUser={this.state.currentUser} allNotes={this.state.allNotes} />} />
 
           </Switch>
-          <Route exact path='/home' render={(routerProps) => <MainContainer {...routerProps} selectBeach={this.selectBeach} beachData={this.state.beachData.results} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData} currentUser={this.state.currentUser} doTheThing={this.doTheThing} theFavs={this.state.theFavs} />} />
+          <Route exact path='/home' render={(routerProps) => <MainContainer {...routerProps} selectBeach={this.selectBeach} beachData={this.state.beachData.results} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData} currentUser={this.state.currentUser} doTheThing={this.doTheThing} theFavs={this.doTheThing()} />} />
 
         </div>
 
