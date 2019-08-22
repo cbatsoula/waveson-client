@@ -41,7 +41,7 @@ class BeachCard extends React.Component {
     return (
       <div className="Beach-Card" onClick={() => {this.props.selectBeach(this.props.beach.name)}}>
         <ul className="nobull">
-          <center><li style={{fontSize: 35}}>{this.props.beach.name}</li></center>
+          <center style={{fontSize: 30}}>{this.props.beach.name}</center>
           {
             this.state.address
             ?

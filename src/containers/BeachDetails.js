@@ -16,11 +16,7 @@ class BeachDetails extends React.Component {
     seven: null,
     eight:  null,
   }
-  // toggleList(){
-  //   this.setState(prevState => ({
-  //     listOpen: !prevState.listOpen
-  //   }))
-  // }
+
   componentDidMount() {
     let uh = this.props.today.hourly
     this.setState({
@@ -39,29 +35,29 @@ class BeachDetails extends React.Component {
   renderWeather = (param) => {
     switch(this.state.selected) {
       case 'one':
-        console.log("one")
+        // console.log("one")
         return <Hourly weather={this.state.one}/>;
       case 'two':
-        console.log("two")
+        // console.log("two")
         return <Hourly weather={this.state.two}/>;
       case 'three':
-        console.log("three")
+        // console.log("three")
         return <Hourly weather={this.state.three}/>;
       case 'four':
-        console.log("four")
+        // console.log("four")
         return <Hourly weather={this.state.four}/>;
       case 'five':
-        console.log("five")
+        // console.log("five")
         return <Hourly weather={this.state.five}/>;
       case 'six':
-        console.log("six")
+        // console.log("six")
         return <Hourly weather={this.state.six}/>;
 
       case 'seven':
-        console.log("seven")
+        // console.log("seven")
         return <Hourly weather={this.state.seven}/>;
       case 'eight':
-        console.log("eight")
+        // console.log("eight")
         return <Hourly weather={this.state.eight}/>;
       default:
         return null;
@@ -93,12 +89,11 @@ class BeachDetails extends React.Component {
         <option value={"eight"}>9pm - 12am</option>
         </select>
       </div>
+      
       <div className="Beach-Details">
         <ul>
-          <li>Today's High F: {this.props.today.maxtempF}</li>
-          <li>Today's High C: {this.props.today.maxtempC}</li>
-          <li>Today's Low F: {this.props.today.mintempF}</li>
-          <li>Today's Low C: {this.props.today.mintempC}</li>
+          <li>Today's high: {this.props.today.maxtempF} F / {this.props.today.maxtempC} C</li>
+          <li>Today's low: {this.props.today.mintempF} F / {this.props.today.mintempC} C</li>
           <li>Sunset: {this.props.today.astronomy[0].sunset}</li>
           <li>Sunrise: {this.props.today.astronomy[0].sunrise}</li>
           <li>Moonrise: {this.props.today.astronomy[0].moonrise}</li>

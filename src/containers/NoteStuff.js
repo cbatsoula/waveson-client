@@ -13,9 +13,9 @@ class NoteStuff extends React.Component {
     allNotes: null,
     oneNote: null,
     select: false,
-    tag: null,
-    oneTag: null,
-    allTags: null,
+    // tag: null,
+    // oneTag: null,
+    // allTags: null,
     photoInfo: null,
     loading: false,
     idkmydude: null,
@@ -142,7 +142,7 @@ class NoteStuff extends React.Component {
 
   componentDidMount() {
     this.fetchNotes()
-    this.fetchTags()
+    // this.fetchTags()
   }
 
   fetchNotes = () => {
@@ -243,6 +243,12 @@ class NoteStuff extends React.Component {
         });
       }
 
+      // <input
+      // onChange={this.handleChange}
+      // name="tag"
+      // type="text"
+      // value={this.state.oneTag ? this.state.oneTag.tag : this.state.tag}
+      // placeholder="tags"/>
       // <Image cloudName="dlybpe5za" publicId="sample" width="300" crop="scale" />
   render () {
     // console.log("note", this.state)
@@ -251,15 +257,9 @@ class NoteStuff extends React.Component {
       <div className="Note-Container">
             <div className="upload">
                 <button onClick={this.uploadWidget.bind(this)} className="upload-button">
-                    📷 ADD IMAGE 📸 
+                    📷 ADD IMAGE 📸
                 </button>
-                {
-                  this.state.loading
-                  ?
-                  <h4>Loading...</h4>
-                  :
-                  <h4>Select</h4>
-                }
+
                 {
                   this.state.idkmydude
                   ?
@@ -280,12 +280,6 @@ class NoteStuff extends React.Component {
           cols="50"
           type="text"
           placeholder="Start your entry here!"/>
-          <input
-          onChange={this.handleChange}
-          name="tag"
-          type="text"
-          value={this.state.oneTag ? this.state.oneTag.tag : this.state.tag}
-          placeholder="tags"/>
           <input className="button" type="submit" value="Submit" />
         </form>
       {
@@ -293,7 +287,7 @@ class NoteStuff extends React.Component {
         ?
         this.renderNoteCards()
         :
-        null
+        <div className="Loader"/>
       }
 
       </div>

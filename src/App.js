@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import logo from './logo.svg';
+import Loader from './components/Loader'
 import './App.css';
 import Nav from './components/Nav';
 import MainContainer from './containers/MainContainer';
@@ -20,7 +21,7 @@ import AllNotes from './containers/AllNotes';
 class App extends React.Component {
 
   state = {
-    beachData: [],
+    beachData: null,
     userLoc: {},
     currentUser: null,
     currentBeach: null,
@@ -325,9 +326,22 @@ class App extends React.Component {
           <Switch>
 
             <Route path='/signup' render={() => <SignUp setUser={this.setUser} signUpUser={this.signUpUser}/>} />
-            <Route path="/login" render={(routerProps) => <Login {...routerProps} loginUser={this.loginUser}/>} />
+            {
+              this.state.beachData
+              ?
+              <Route path="/login" render={(routerProps) => <Login {...routerProps} loginUser={this.loginUser} beachData={this.state.beachData}/>} />
+              :
+              <>
+              <div className="Space" />
+              <div className="Loader"/>
+              </>
+            }
+
             <Route path='/map' component={Map} />
-            <Route path='/beach' render={(routerProps) => <Show {...routerProps} currentBeach={this.state.currentBeach} currentUser={this.state.currentUser} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData} doTheThing={this.doTheThing} theFavs={this.doTheThing()} saveBeach={this.saveBeach} removeBeach={this.removeBeach}/>} />
+            <Route path='/beach' render={(routerProps) => <Show {...routerProps} currentBeach={this.state.currentBeach} currentUser={this.state.currentUser} allBeaches={this.state.allBeaches} beachSaveData={this.state.beachSaveData} doTheThing={this.doTheThing} theFavs={this.doTheThing()} saveBeach={this.saveBeach} removeBeach={this.removeBeach}/>}
+             />
+
+            <Route path='/loader' render={() => <Loader />} />
 
             <Route path="/notes" render={(routerProps) => <AllNotes {...routerProps} fetchNotes={this.fetchNotes} currentUser={this.state.currentUser} allNotes={this.state.allNotes} />} />
 

@@ -1,0 +1,22 @@
+.newLoader {
+  background-image: url('/wavesonTransp.png');
+  display: flex;
+  height: 55%;
+  width: 55%;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  margin: auto;
+  animation: Loader infinite 20s linear;
+  background-size: cover;
+}
+
+@keyframes newLoader {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(500deg);
+  }
+}

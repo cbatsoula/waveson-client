@@ -167,7 +167,7 @@ button:active {
   display: flex;
   background-color: #dee3cc;
   width: 15vw;
-  height: 30vh;
+  height: 37vh;
   color: #976224;
   font-size: 25px;
   justify-items: space-evenly;
@@ -255,7 +255,7 @@ button:active {
 
 .Space {
   display: flex;
-  height: 20vh;
+  height: 10vh;
   width: 100vh;
 }
 
@@ -431,6 +431,32 @@ input[type=submit] {
 .nobull {
  list-style-type: none;
 
+}
+
+.Loader {
+  background-image: url('/wavesonTransp.png');
+  /* display: flex; */
+  height: 70%;
+  width: 100%;
+  /* align-items: center;
+  justify-content: center; */
+  z-index: 1000;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  /* margin: auto; */
+  animation: Loader infinite 20s linear;
+
+}
+
+@keyframes Loader {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(600deg);
+  }
 }
 
 

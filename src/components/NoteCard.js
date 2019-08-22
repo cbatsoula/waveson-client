@@ -17,6 +17,7 @@ class NoteCard extends React.Component {
       })
     }
   }
+  // <li>Tags: {this.renderTags()}</li>
 
   render () {
     // console.log(" note card props ", this.props)
@@ -27,7 +28,6 @@ class NoteCard extends React.Component {
         <ul>
           <li>{this.props.note.note}</li>
           <li>{this.formatDate()}</li>
-          <li>Tags: {this.renderTags()}</li>
         </ul>
         </div>
         {

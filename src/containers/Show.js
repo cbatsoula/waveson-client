@@ -5,6 +5,7 @@ import Banner from '../components/Banner';
 import NoteStuff from './NoteStuff';
 // import why from './why.html';
 
+
   const WORLD_API_KEY = `${process.env.REACT_APP_WORLD_API_KEY}`
 
 class Show extends React.Component {
@@ -41,27 +42,37 @@ class Show extends React.Component {
     // console.log("user", this.props.currentUser)
     // console.log("all beaches from api", this.props.allBeaches)
     return (
-      <div className="Show">
-
-        <div className="Show-Details">
-          {this.props.currentBeach.name}
-
-          <button onClick={this.props.saveBeach}>📌 SAVE</button>
-          <button onClick={this.props.removeBeach}>🗑️ REMOVE</button>
-
-        </div>
+      <>
         {
           this.state.today
           ?
-          <BeachDetails today={this.state.today}/>
+          <>
+            <div className="Show">
+              <div className="Show-Details">
+                {this.props.currentBeach.name}
+
+                <button onClick={this.props.saveBeach}>📌 SAVE</button>
+                <button onClick={this.props.removeBeach}>🗑️ REMOVE</button>
+              </div>
+              <BeachDetails today={this.state.today}/>
+              <Banner title={"Notes"}/>
+              <NoteStuff allBeaches={this.props.allBeaches} currentUser={this.props.currentUser} currentBeach={this.props.currentBeach}/>
+            </div>
+          </>
           :
-          null
+          <>
+          <div className="Space"/>
+          <div className="Loader"/>
+          </>
         }
-        <Banner title={"Notes"}/>
-        <NoteStuff allBeaches={this.props.allBeaches} currentUser={this.props.currentUser} currentBeach={this.props.currentBeach}/>
-      </div>
+
+      </>
     )
   }
 }
 
 export default Show;
+
+
+// <div className="Loader">CONTENT</div>
+// <Banner title={"why my guy"}/>
