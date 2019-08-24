@@ -36,17 +36,17 @@ class App extends React.Component {
     // let thisOne = this.state.allBeaches.find(beach => {
     //   return beach.name === this.state.currentBeach.name
     // })
-    // let userID = this.state.currentUser.id
+    let userID = this.state.currentUser.id
     fetch('http://localhost:3000/notes')
       .then( r => r.json())
       .then( stuff => {
-        // let findFromNotes = stuff.filter( note => {
-        //   return note.beach_id === thisOne.id && note.user_id === userID})
-        // console.log("pls", findFromNotes)
-        // debugger;
+        let findFromNotes = stuff.filter( note => {
+          return note.user_id === userID})
+        console.log("pls", findFromNotes)
+        debugger;
 
         this.setState({
-          allNotes: stuff
+          allNotes: findFromNotes
         })
 
       })
@@ -244,10 +244,10 @@ class App extends React.Component {
      ))
      return finalArray
      // console.log("final array", finalArray)
-     console.log("ONLY FUCKING NOW MY DUDE?")
+     console.log("NOW")
      this.setState({
        theFavs: finalArray
-     }, () => {console.log("ONLY FUCKING NOW MY DUDE?", this.state.theFavs)})
+     }, () => {console.log("NOW", this.state.theFavs)})
      }
 
    }
@@ -316,7 +316,7 @@ class App extends React.Component {
 
 
   render() {
-    console.log("app", this.state)
+    console.log("app", this.state.allNotes)
     // console.log("beach info", this.state.beachData.results)
     return (
 

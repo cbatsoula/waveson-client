@@ -89,17 +89,17 @@ class BeachDetails extends React.Component {
         <option value={"eight"}>9pm - 12am</option>
         </select>
       </div>
-      
+
       <div className="Beach-Details">
         <ul>
           <li>Today's high: {this.props.today.maxtempF} F / {this.props.today.maxtempC} C</li>
           <li>Today's low: {this.props.today.mintempF} F / {this.props.today.mintempC} C</li>
-          <li>Sunset: {this.props.today.astronomy[0].sunset}</li>
-          <li>Sunrise: {this.props.today.astronomy[0].sunrise}</li>
           <li>Moonrise: {this.props.today.astronomy[0].moonrise}</li>
           <li>Moonset: {this.props.today.astronomy[0].moonset}</li>
           <li>Moon phase: {this.props.today.astronomy[0].moon_phase}</li>
           <li>Moon illumination: {this.props.today.astronomy[0].moon_illumination}%</li>
+          <li>Sunset: {this.props.today.astronomy[0].sunset}</li>
+          <li>Sunrise: {this.props.today.astronomy[0].sunrise}</li>
 
         </ul>
         <div className="Hourly">

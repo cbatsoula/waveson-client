@@ -64,7 +64,7 @@ class NoteStuff extends React.Component {
 
   } else {
     this.postNotes()
-    this.postTags()
+    // this.postTags()
     }
   };
 
