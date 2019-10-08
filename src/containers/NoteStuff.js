@@ -106,6 +106,13 @@ class NoteStuff extends React.Component {
     let thisOne = this.props.allBeaches.find(beach => {
       return beach.name === this.props.currentBeach.name
     })
+    // this.setState({
+    //
+    // })
+    // perhaps make another function, add Note, that looks through
+    // allNotes and places this newly made note to the tip top
+    // would need at least one arg, the id, to find from the time of
+    // submit to push it up
     // let thisPhoto = this.state.photoInfo[0].secure_url
     fetch("http://localhost:3000/notes", {
       method: "POST",
@@ -122,16 +129,16 @@ class NoteStuff extends React.Component {
     })
       .then(res => res.json())
       .then(data => {
-        this.fetchNotes()
+        // this.fetchNotes()
         // console.log("back from post", data)
         this.setState({
           note: " ",
           select: false,
           allNotes: [data, ...this.state.allNotes]
         }
-        // , () => {this.postNoteTag()}
+        , () => {console.log("POSTED NOTE immed", this.state.allNotes)}
        )
-        // console.log("POSTED NOTE", this.state.allNotes)
+        console.log("POSTED NOTE", this.state.allNotes)
 
         // this.setState({
         //   reviews: [...this.state.reviews, data],
@@ -158,9 +165,10 @@ class NoteStuff extends React.Component {
         // console.log("pls", findFromNotes)
         // debugger;
 
+
         this.setState({
           allNotes: findFromNotes
-        })
+        }, () => {console.log("fetchNotes", this.state.allNotes)})
 
       })
   }

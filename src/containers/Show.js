@@ -8,6 +8,8 @@ import NoteStuff from './NoteStuff';
 
   const WORLD_API_KEY = `${process.env.REACT_APP_WORLD_API_KEY}`
 
+
+
 class Show extends React.Component {
   state = {
     stats: [],
@@ -16,7 +18,7 @@ class Show extends React.Component {
 
   componentDidMount() {
 
-    fetch(`https://api.worldweatheronline.com/premium/v1/marine.ashx?tide=yes&key=a1f576b5405f4059a00170203190508&format=json&q=${this.props.currentBeach.geometry.location.lat},${this.props.currentBeach.geometry.location.lng}`)
+    fetch(`https://api.worldweatheronline.com/premium/v1/marine.ashx?tide=yes&key=${WORLD_API_KEY}&format=json&q=${this.props.currentBeach.geometry.location.lat},${this.props.currentBeach.geometry.location.lng}`)
       .then( r => r.json() )
       .then( data => {
         this.setState({
@@ -24,6 +26,7 @@ class Show extends React.Component {
         }, () => {
           // console.log(this.state.stats.data.weather[0])
           this.renderToday()
+          // console.log("OVER HERE SKEEVER BUTT", this.state)
         })
       })
   }

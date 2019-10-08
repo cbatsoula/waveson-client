@@ -99,7 +99,7 @@ class BeachDetails extends React.Component {
           <li>Moon phase: {this.props.today.astronomy[0].moon_phase}</li>
           <li>Moon illumination: {this.props.today.astronomy[0].moon_illumination}%</li>
           <li>Sunset: {this.props.today.astronomy[0].sunset}</li>
-          <li>Sunrise: {this.props.today.astronomy[0].sunrise}</li>
+          <li>Sunrise: {this.props.today.astronomy[0].sunrise}</li>  
 
         </ul>
         <div className="Hourly">
