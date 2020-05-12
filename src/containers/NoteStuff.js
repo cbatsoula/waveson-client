@@ -157,18 +157,19 @@ class NoteStuff extends React.Component {
       return beach.name === this.props.currentBeach.name
     })
     let userID = this.props.currentUser.id
+    console.log("userID", userID)
     fetch('http://localhost:3000/notes')
       .then( r => r.json())
       .then( stuff => {
         let findFromNotes = stuff.filter( note => {
           return note.beach_id === thisOne.id && note.user_id === userID})
-        // console.log("pls", findFromNotes)
+        console.log("pls", findFromNotes)
         // debugger;
 
 
         this.setState({
           allNotes: findFromNotes
-        }, () => {console.log("fetchNotes", this.state.allNotes)})
+        }, () => {console.log("fetchNotes", this.state.allNotes, userID)})
 
       })
   }

@@ -36,20 +36,36 @@ class App extends React.Component {
     // let thisOne = this.state.allBeaches.find(beach => {
     //   return beach.name === this.state.currentBeach.name
     // })
-    let userID = this.state.currentUser.id
     fetch('http://localhost:3000/notes')
       .then( r => r.json())
       .then( stuff => {
-        let findFromNotes = stuff.filter( note => {
-          return note.user_id === userID})
-        console.log("pls", findFromNotes)
-        debugger;
+          let findFromNotes = stuff.filter( note => {
+            return note.user_id === this.state.currentUser.id
 
+            //from this container of notes I want to only display the notes with the note.user_id to be equal === to whoever is currentUser.id
+          })
+          // console.log("pls", findFromNotes)
+          // console.log("userID", userID)
+        console.log("APP FETCH NOTES----------", findFromNotes)
         this.setState({
-          allNotes: findFromNotes
+          allNotes: stuff
         })
 
       })
+    // let userID = this.state.currentUser.id
+    // fetch('http://localhost:3000/notes')
+    //   .then( r => r.json())
+    //   .then( stuff => {
+    //     let findFromNotes = stuff.filter( note => {
+    //       return note.user_id === userID})
+    //     console.log("pls", findFromNotes)
+    //
+    //
+    //     this.setState({
+    //       allNotes: findFromNotes
+    //     }, () => {console.log("fetchNotes", findFromNotes)})
+    //
+    //   })
   }
 
   selectBeach = (propsName) => {
@@ -68,7 +84,6 @@ class App extends React.Component {
     fetch('http://localhost:3000/favs')
       .then( r => r.json())
       .then( data => {
-          // console.log("wtf my dude", data)
         this.setState({
           beachSaveData: data
         }, () => this.doTheThing())
@@ -93,20 +108,9 @@ class App extends React.Component {
           allBeaches: allBeaches
         })
       })
-    this.fetchFavs()
-    fetch('http://localhost:3000/notes')
-      .then( r => r.json())
-      .then( stuff => {
-          // let findFromNotes = stuff.filter( note => {
-          //   return note.beach_id === thisOne.id && note.user_id === userID})
-          // console.log("pls", findFromNotes)
-          // debugger;
 
-        this.setState({
-          allNotes: stuff
-        })
 
-      })
+      this.fetchFavs()
   }
 
   beachesFromUserLoc() {
@@ -200,10 +204,15 @@ class App extends React.Component {
         this.setState({
           currentUser: response,
           // loading: false
-        }, () => {this.props.history.push('/home')})
+        }, () => {
+          this.fetchNotes()
+
+          this.props.history.push('/home')})
       }
     })
   }
+
+
 
   setUser = (response) => {
     this.setState({

@@ -21,7 +21,7 @@ class NoteCard extends React.Component {
 
   render () {
     // console.log(" note card props ", this.props)
-    console.log("note card", window.location)
+    // console.log("note card", window.location)
     return (
       <div className="Note-Card">
         <div className="Note-Text">
