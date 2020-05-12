@@ -48,7 +48,7 @@ class App extends React.Component {
           // console.log("userID", userID)
         console.log("APP FETCH NOTES----------", findFromNotes)
         this.setState({
-          allNotes: stuff
+          allNotes: findFromNotes
         })
 
       })
