@@ -12,10 +12,6 @@ import Map from './components/Map';
 import AllNotes from './containers/AllNotes';
 
 
-// import { Link } from 'react-router-dom';
-  //find exactly what headers google wants to fully fix this
-  // const API = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLat},${userLng}&radius=20000&type=natural_feature&keyword=beach&key=AIzaSyDA0kZdff9Oi6T6PM7nKwVG92c3uELsbRE`
-  const API_KEY = `${process.env.REACT_APP_GOOGLE_API_KEY}`
 
 
 class App extends React.Component {
@@ -92,7 +88,7 @@ class App extends React.Component {
 
   componentDidMount() {
 
-    fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${API_KEY}`, {
+    fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.REACT_APP_GOOGLE_API_KEY}`, {
       method: "POST"
     })
       .then(r => r.json())
@@ -117,7 +113,7 @@ class App extends React.Component {
     let userLat = this.state.userLoc.lat.toString()
     let userLng = this.state.userLoc.lng.toString()
 
-    fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLat},${userLng}&radius=21000&type=natural_feature&keyword=beach&key=${API_KEY}`, {
+    fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${userLat},${userLng}&radius=21000&type=natural_feature&keyword=beach&key=${process.env.REACT_APP_GOOGLE_API_KEY}`, {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
