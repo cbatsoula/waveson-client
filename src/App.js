@@ -29,10 +29,8 @@ class App extends React.Component {
 
 
   fetchNotes = () => {
-    // let thisOne = this.state.allBeaches.find(beach => {
-    //   return beach.name === this.state.currentBeach.name
-    // })
-    fetch('http://localhost:3000/notes')
+
+    fetch('/notes')
       .then( r => r.json())
       .then( stuff => {
           let findFromNotes = stuff.filter( note => {
@@ -77,7 +75,7 @@ class App extends React.Component {
   }
 
   fetchFavs = () => {
-    fetch('http://localhost:3000/favs')
+    fetch('/favs')
       .then( r => r.json())
       .then( data => {
         this.setState({
@@ -97,7 +95,7 @@ class App extends React.Component {
           userLoc: data.location
         }, () => {this.beachesFromUserLoc()})
       })
-    fetch('http://localhost:3000/beaches')
+    fetch('/beaches')
       .then( r => r.json())
       .then( allBeaches => {
         this.setState({
@@ -129,7 +127,7 @@ class App extends React.Component {
 
   postBeaches() {
     this.state.beachData.results.map(beach => {
-      return fetch('http://localhost:3000/beaches', {
+      return fetch('/beaches', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -150,7 +148,7 @@ class App extends React.Component {
 
   signUpUser = (input) => {
     if (input.password === input.passwordConfirmation) {
-      fetch('http://localhost:3000/signup', {
+      fetch('/signup', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -181,7 +179,7 @@ class App extends React.Component {
 
 
   loginUser = (input) => {
-    fetch('http://localhost:3000/login', {
+    fetch('/login', {
       method: "POST",
       headers: {
         "Content-Type": 'application/json',
@@ -275,7 +273,7 @@ class App extends React.Component {
        console.log("wut", thisOne && !favCheck)
        // debugger;
        if (thisOne && !favCheck){
-         fetch('http://localhost:3000/favs', {
+         fetch('/favs', {
            method: "POST",
            headers: {
              "Content-Type": "application/json",
@@ -304,7 +302,7 @@ class App extends React.Component {
            // console.log("remove favID", favID)
          })
 
-         fetch(`http://localhost:3000/favs/${favID.id}`, {
+         fetch(`/favs/${favID.id}`, {
            method: "DELETE",
            headers: {
              "Content-Type": "application/json",
