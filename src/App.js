@@ -32,7 +32,7 @@ class App extends React.Component {
     // let thisOne = this.state.allBeaches.find(beach => {
     //   return beach.name === this.state.currentBeach.name
     // })
-    fetch('/notes')
+    fetch('/notes.json')
       .then( r => r.json())
       .then( stuff => {
           let findFromNotes = stuff.filter( note => {
@@ -77,7 +77,7 @@ class App extends React.Component {
   }
 
   fetchFavs = () => {
-    fetch('/favs')
+    fetch('/favs.json')
       .then( r => r.json())
       .then( data => {
         this.setState({
@@ -97,7 +97,7 @@ class App extends React.Component {
           userLoc: data.location
         }, () => {this.beachesFromUserLoc()})
       })
-    fetch('/beaches')
+    fetch('/beaches.json')
       .then( r => r.json())
       .then( allBeaches => {
         this.setState({
@@ -129,7 +129,7 @@ class App extends React.Component {
 
   postBeaches() {
     this.state.beachData.results.map(beach => {
-      return fetch('/beaches', {
+      return fetch('/beaches.json', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -275,7 +275,7 @@ class App extends React.Component {
        console.log("wut", thisOne && !favCheck)
        // debugger;
        if (thisOne && !favCheck){
-         fetch('/favs', {
+         fetch('/favs.json', {
            method: "POST",
            headers: {
              "Content-Type": "application/json",
@@ -304,7 +304,7 @@ class App extends React.Component {
            // console.log("remove favID", favID)
          })
 
-         fetch(`/favs/${favID.id}`, {
+         fetch(`/favs/${favID.id}.json`, {
            method: "DELETE",
            headers: {
              "Content-Type": "application/json",
