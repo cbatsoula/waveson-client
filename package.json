@@ -2,11 +2,7 @@
   "name": "test-waveson-client",
   "version": "0.1.0",
   "private": true,
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:3001"
-    }
-  },
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "cloudinary-react": "^1.1.4",
     "react": "^16.8.6",
